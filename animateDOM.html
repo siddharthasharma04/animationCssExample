@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Demo for Animate CSS</title>
+        <!-- Anmate Css -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <style>
+            body{
+                background-color: #f0f0f0;
+            }
+            img{
+                margin: auto;
+            }
+            button{
+                margin:10px;
+            }
+            .zoomOutDown {
+                    -webkit-animation: zoomOutDown 500ms; /* Safari 4+ */
+                    -moz-animation:    zoomOutDown 500ms; /* Fx 5+ */
+                    -o-animation:      zoomOutDown 500ms; /* Opera 12+ */
+                    animation:         zoomOutDown 500ms; /* IE 10+, Fx 29+ */
+                } 
+        
+        </style>
+    </head>
+    <body>
+        <div class="container text-center">
+                <h1 class="text-danger">Example for Animated Pop-up</h1>
+                
+                <div class="button-wrapper">
+
+                </div>
+        </div>
+        
+        
+
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script>
+            let animClasses = ['bounce','zoomIn','zoomInUp','jackInTheBox','wobble','tada','heartBeat','bounceIn','fadeInUp'];
+            
+            let getTemplate = (cls) => `<div class="modal" id="animatedModal" style="display:block;" tabindex="-1" role="dialog" data-backdrop="false">
+                    <div class="modal-dialog  animated ${cls} modal-sm" role="document" style="top:15%;">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <span class="modal-title text-info" id="exampleModalLabel"><strong>I'm Bootstrap Modal</strong></span>
+                                <button type="button" class="close" onclick="removeModal('${cls}');" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div >
+                                        <img class="img-responsive" src="https://media.istockphoto.com/vectors/the-receptionist-vector-id460455723?k=6&m=460455723&s=612x612&w=0&h=wUUfG17er36RsMwKUkBY9kOl0KZyS6oh1FdFyuRKUZE=" width="250" alt="Dummy">
+                                </div>
+                            </div>
+                            <style>
+                                .${cls} {
+                                    -webkit-animation: ${cls} 800ms; /* Safari 4+ */
+                                    -moz-animation:    ${cls} 800ms; /* Fx 5+ */
+                                    -o-animation:      ${cls} 800ms; /* Opera 12+ */
+                                    animation:         ${cls} 800ms; /* IE 10+, Fx 29+ */
+                                } 
+                            </style>
+                        </div>
+                    </div>
+                </div>`;
+            let setButtons = () => {
+                animClasses.forEach((value,index)=>{
+                    let temp = `<button type="button" class="btn btn-primary" onclick="showModal('${value}')">
+                                ${value}
+                            </button>`;
+                    $('.button-wrapper').append(temp);
+                })
+            }
+            let showModal = (cls) => {
+                if(cls){
+                 loadModal(cls);
+                }
+            }
+            let loadModal = (cls) => {
+                $('body').append(getTemplate(cls));
+                //$('#animatedModal').modal('open');
+            }
+            let removeModal = (cls) => {
+                $('#animatedModal .modal-dialog').removeClass(cls).addClass('zoomOutDown');
+                setTimeout(()=>{
+                    $('#animatedModal').remove();
+                },480);
+            }
+            $(()=>{
+                setButtons();
+            });
+        </script>
+    </body>
+</html>
